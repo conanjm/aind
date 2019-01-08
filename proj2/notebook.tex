@@ -1,0 +1,1032 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{analise}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{important-to-exce-in-system}{%
+\subsubsection{Important to exce in
+system:}\label{important-to-exce-in-system}}
+
+\hypertarget{cat-results.txt-sed--e-sg-load_results.py}{%
+\subsubsection{\texorpdfstring{\texttt{\$\ cat\ results.txt\ \textbar{}sed\ -e\ \textquotesingle{}s/{]}/{]},\textbackslash{}\textbackslash{}/g\textquotesingle{}\ \textgreater{}load\_results.py}}{\$ cat results.txt \textbar{}sed -e 's/{]}/{]},\textbackslash{}\textbackslash{}/g' \textgreater{}load\_results.py}}\label{cat-results.txt-sed--e-sg-load_results.py}}
+
+\hypertarget{and-edit-the-file-load_results.py-adding-results-at-begin-and-change-the-last-by.}{%
+\subsubsection{\texorpdfstring{And edit the file
+\texttt{load\_results.py} adding: `\texttt{results\ =\ {[}}' at begin,
+and change the last `\texttt{,\textbackslash{}\textquotesingle{}}
+by'\texttt{{]}}'.}{And edit the file load\_results.py adding: `results = {[}' at begin, and change the last `,\textbackslash{}' by'{]}'.}}\label{and-edit-the-file-load_results.py-adding-results-at-begin-and-change-the-last-by.}}
+
+\hypertarget{machine-intelr-xeonr-cpu-e3-1241-v3-3.50ghz}{%
+\subsubsection{Machine: Intel(R) Xeon(R) CPU E3-1241 v3 @
+3.50GHz}\label{machine-intelr-xeonr-cpu-e3-1241-v3-3.50ghz}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{load\PYZus{}results} \PY{k}{as} \PY{n+nn}{lr}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{markdown}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Markdown} \PY{k}{as} \PY{n}{md}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/israel/anaconda3/envs/aind/lib/python3.5/importlib/\_bootstrap.py:222: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{results}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Problem}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Search Method}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heuristic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expansions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Goal Tests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New Nodes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plan length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}                 Problem                   Search Method    Heuristic  Actions  \textbackslash{}
+        0   Air Cargo Problem 1            Breadth First Search                    20   
+        1   Air Cargo Problem 1        Depth First Graph Search                    20   
+        2   Air Cargo Problem 1             Uniform Cost Search                    20   
+        3   Air Cargo Problem 1  Greedy Best First Graph Search  Unmet Goals       20   
+        4   Air Cargo Problem 1  Greedy Best First Graph Search     LevelSum       20   
+        5   Air Cargo Problem 1  Greedy Best First Graph Search     MaxLevel       20   
+        6   Air Cargo Problem 1  Greedy Best First Graph Search     SetLevel       20   
+        7   Air Cargo Problem 1                       A* Search  Unmet Goals       20   
+        8   Air Cargo Problem 1                       A* Search     LevelSum       20   
+        9   Air Cargo Problem 1                       A* Search     MaxLevel       20   
+        10  Air Cargo Problem 1                       A* Search     SetLevel       20   
+        11  Air Cargo Problem 2            Breadth First Search                    72   
+        12  Air Cargo Problem 2        Depth First Graph Search                    72   
+        13  Air Cargo Problem 2             Uniform Cost Search                    72   
+        14  Air Cargo Problem 2  Greedy Best First Graph Search  Unmet Goals       72   
+        15  Air Cargo Problem 2  Greedy Best First Graph Search     LevelSum       72   
+        16  Air Cargo Problem 2  Greedy Best First Graph Search     MaxLevel       72   
+        17  Air Cargo Problem 2  Greedy Best First Graph Search     SetLevel       72   
+        18  Air Cargo Problem 2                       A* Search  Unmet Goals       72   
+        19  Air Cargo Problem 2                       A* Search     LevelSum       72   
+        20  Air Cargo Problem 2                       A* Search     MaxLevel       72   
+        21  Air Cargo Problem 2                       A* Search     SetLevel       72   
+        22  Air Cargo Problem 3            Breadth First Search                    88   
+        23  Air Cargo Problem 3        Depth First Graph Search                    88   
+        24  Air Cargo Problem 3             Uniform Cost Search                    88   
+        25  Air Cargo Problem 3  Greedy Best First Graph Search  Unmet Goals       88   
+        26  Air Cargo Problem 3  Greedy Best First Graph Search     LevelSum       88   
+        27  Air Cargo Problem 3  Greedy Best First Graph Search     MaxLevel       88   
+        28  Air Cargo Problem 3  Greedy Best First Graph Search     SetLevel       88   
+        29  Air Cargo Problem 3                       A* Search  Unmet Goals       88   
+        30  Air Cargo Problem 3                       A* Search     LevelSum       88   
+        31  Air Cargo Problem 3                       A* Search     MaxLevel       88   
+        32  Air Cargo Problem 3                       A* Search     SetLevel       88   
+        33  Air Cargo Problem 4            Breadth First Search                   104   
+        34  Air Cargo Problem 4        Depth First Graph Search                   104   
+        35  Air Cargo Problem 4             Uniform Cost Search                   104   
+        36  Air Cargo Problem 4  Greedy Best First Graph Search  Unmet Goals      104   
+        37  Air Cargo Problem 4  Greedy Best First Graph Search     LevelSum      104   
+        38  Air Cargo Problem 4  Greedy Best First Graph Search     MaxLevel      104   
+        39  Air Cargo Problem 4  Greedy Best First Graph Search     SetLevel      104   
+        40  Air Cargo Problem 4                       A* Search  Unmet Goals      104   
+        41  Air Cargo Problem 4                       A* Search     LevelSum      104   
+        42  Air Cargo Problem 4                       A* Search     MaxLevel      104   
+        43  Air Cargo Problem 4                       A* Search     SetLevel      104   
+        
+            Expansions  Goal Tests  New Nodes  Plan length     Time (s)  
+        0           43          56        178            6     0.014622  
+        1           21          22         84           20     0.004608  
+        2           60          62        240            6     0.012984  
+        3            7           9         29            6     0.001330  
+        4            6           8         28            6     0.361100  
+        5            6           8         24            6     0.123746  
+        6            6           8         28            6     0.361199  
+        7           50          52        206            6     0.009082  
+        8           28          30        122            6     0.180238  
+        9           43          45        180            6     0.130797  
+        10          33          35        138            6     0.294279  
+        11        3343        4609      30503            9     0.262624  
+        12         624         625       5602          619     0.371304  
+        13        5154        5156      46618            9     0.472541  
+        14          17          19        170            9     0.020087  
+        15           9          11         86            9     0.462424  
+        16          27          29        249            9     0.893043  
+        17           9          11         84            9     0.952086  
+        18        2467        2469      22522            9     0.483945  
+        19         357         359       3426            9    11.682881  
+        20        2887        2889      26594            9    68.580995  
+        21        1037        1039       9605            9    74.366656  
+        22       14663       18098     129625           12     0.598645  
+        23         408         409       3364          392     0.122798  
+        24       18510       18512     161936           12     0.941394  
+        25          25          27        230           15     0.006084  
+        26          14          16        126           14     1.072023  
+        27          21          23        195           13     1.187517  
+        28          35          37        345           17     4.498037  
+        29        7388        7390      65711           12     0.664297  
+        30         369         371       3403           12    18.008018  
+        31        9580        9582      86312           12   328.885545  
+        32        3423        3425      31596           12   399.911846  
+        33       99736      114953     944130           14     4.302616  
+        34       25174       25175     228849        24132   787.053242  
+        35      113339      113341    1066413           14     6.708288  
+        36          29          31        280           18     0.034336  
+        37          17          19        165           17     1.747734  
+        38          56          58        580           17     4.247899  
+        39         107         109       1164           23    20.591328  
+        40       34330       34332     328509           14     3.102267  
+        41        1208        1210      12210           15   110.618458  
+        42       62077       62079     599376           14  3222.123989  
+        43       22606       22608     224229           14  4182.825754  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my\PYZus{}table.tex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{to\PYZus{}latex}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (log)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}f = open(\PYZsq{}README.md\PYZsq{}, \PYZsq{}r\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}htmlmarkdown=markdown.markdown( f.read() )}
+         \PY{c+c1}{\PYZsh{}md(htmlmarkdown)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}f = open(\PYZsq{}examples.md\PYZsq{}, \PYZsq{}r\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}htmlmarkdown=markdown.markdown( f.read() )}
+         \PY{c+c1}{\PYZsh{}md(htmlmarkdown)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}f = open(\PYZsq{}pseudocode/heuristics.md\PYZsq{}, \PYZsq{}r\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}htmlmarkdown=markdown.markdown( f.read() )}
+         \PY{c+c1}{\PYZsh{}md(htmlmarkdown)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{only\PYZus{}upper}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{:}
+            \PY{n}{s} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+            \PY{n}{upper\PYZus{}chars} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+            \PY{k}{for} \PY{n}{char} \PY{o+ow}{in} \PY{n}{s}\PY{p}{:}
+                \PY{k}{if} \PY{n}{char}\PY{o}{.}\PY{n}{isupper}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{upper\PYZus{}chars} \PY{o}{+}\PY{o}{=} \PY{n}{char}
+            \PY{k}{return} \PY{n}{upper\PYZus{}chars}
+        
+        \PY{c+c1}{\PYZsh{}print(only\PYZus{}upper(results\PYZus{}sep[i][[results.columns[1]]].values[0]))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{SA} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+         \PY{n}{HS} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{results\PYZus{}sep} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{search} \PY{o+ow}{in} \PY{n}{SA}\PY{p}{:}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{n}{search}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{temp}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{results\PYZus{}sep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+                     
+         \PY{c+c1}{\PYZsh{}results\PYZus{}sep}
+\end{Verbatim}
+
+
+    \hypertarget{use-a-table-or-chart-to-analyze-the-number-of-nodes-expanded-against-number-of-actions-in-the-domain}{%
+\subsubsection{1) Use a table or chart to analyze the number of nodes
+expanded against number of actions in the
+domain}\label{use-a-table-or-chart-to-analyze-the-number-of-nodes-expanded-against-number-of-actions-in-the-domain}}
+
+\hypertarget{use-a-table-or-chart-to-analyze-the-search-time-against-the-number-of-actions-in-the-domain}{%
+\subsubsection{2) Use a table or chart to analyze the search time
+against the number of actions in the
+domain}\label{use-a-table-or-chart-to-analyze-the-search-time-against-the-number-of-actions-in-the-domain}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}results\PYZus{}sep[0]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{yy} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{yy}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PYZbs{}
+                          \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PYZbs{}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+             \PY{n}{title} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ vs. }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}title = \PYZsq{}All Search Methods\PYZsq{}}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+             \PY{n}{filename} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig/results\PYZus{}sm}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.png}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+         
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    heur = results\PYZus{}sep[i][[results.columns[2]]].values[0][0]}
+         \PY{l+s+sd}{    if len(heur)\PYZgt{}0:}
+         \PY{l+s+sd}{        alg\PYZus{}search = only\PYZus{}upper(results\PYZus{}sep[i][[results.columns[1]]].values[0][0])+\PYZsq{} w. \PYZsq{}+results\PYZus{}sep[i][[results.columns[2]]].values[0][0]}
+         \PY{l+s+sd}{        alg\PYZus{}search2 = results\PYZus{}sep[i][[results.columns[1]]].values[0][0]+\PYZsq{} with \PYZsq{}+results\PYZus{}sep[i][[results.columns[2]]].values[0][0]}
+         \PY{l+s+sd}{    else:}
+         \PY{l+s+sd}{        alg\PYZus{}search = only\PYZus{}upper(results\PYZus{}sep[i][[results.columns[1]]].values[0][0])}
+         \PY{l+s+sd}{        alg\PYZus{}search2 = results\PYZus{}sep[i][[results.columns[1]]].values[0][0]}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}figure\PYZcb{}}\PY{l+s+s1}{[htpb]}
+         \PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}center\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{includegraphics[width=1}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{columnwidth]}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n}{filename}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{caption}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{Search algorithms without heuristic.\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}center\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{figsm}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}figure\PYZcb{}}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_sm234.png\}
+\textbackslash{}caption\{Search algorithms without heuristic.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{figsm234\}
+\textbackslash{}end\{figure\}
+    
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_sm231.png\}
+\textbackslash{}caption\{Search algorithms without heuristic.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{figsm231\}
+\textbackslash{}end\{figure\}
+    
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{SA} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+         \PY{n}{HS} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{results\PYZus{}sep} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{search} \PY{o+ow}{in} \PY{n}{SA}\PY{p}{:}
+             \PY{n}{results\PYZus{}hs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{heuristic} \PY{o+ow}{in} \PY{n}{HS}\PY{p}{:}
+                 \PY{n}{temp} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{n}{search}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{n}{heuristic}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{temp}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{results\PYZus{}hs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}hs}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{results\PYZus{}sep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{results\PYZus{}hs}\PY{p}{)}
+                     
+         \PY{c+c1}{\PYZsh{}results\PYZus{}sep}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}results\PYZus{}sep[0][0]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{3}
+             \PY{n}{yy} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         
+             \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{yy}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PYZbs{}
+                              \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PYZbs{}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{title} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ vs. }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{x}\PY{p}{]}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{filename} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig/results\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.png}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n}{alg\PYZus{}search} \PY{o}{=} \PY{n}{only\PYZus{}upper}\PY{p}{(}\PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{alg\PYZus{}search2} \PY{o}{=} \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{subsection}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n}{alg\PYZus{}search2}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         
+         \PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}figure\PYZcb{}}\PY{l+s+s1}{[htpb]}
+         \PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}center\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{includegraphics[width=1}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{columnwidth]}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n}{filename}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{caption}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{Search Method }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n}{alg\PYZus{}search}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{caption}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n}{alg\PYZus{}search2}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{.\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}center\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{fig}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}figure\PYZcb{}}
+         \PY{l+s+s1}{        }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+                 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\%\textbackslash{}subsection\{Greedy Best First Graph Search\}
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_034.png\}
+\%\textbackslash{}caption\{Search Method GBFGS\}
+\textbackslash{}caption\{Greedy Best First Graph.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{fig034\}
+\textbackslash{}end\{figure\}
+        
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\%\textbackslash{}subsection\{Greedy Best First Graph Search\}
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_031.png\}
+\%\textbackslash{}caption\{Search Method GBFGS\}
+\textbackslash{}caption\{Greedy Best First Graph.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{fig031\}
+\textbackslash{}end\{figure\}
+        
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\%\textbackslash{}subsection\{A* Search\}
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_134.png\}
+\%\textbackslash{}caption\{Search Method AS\}
+\textbackslash{}caption\{A*.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{fig134\}
+\textbackslash{}end\{figure\}
+        
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\%\textbackslash{}subsection\{A* Search\}
+
+\textbackslash{}begin\{figure\}[htpb]
+\textbackslash{}begin\{center\}
+\textbackslash{}includegraphics[width=1\textbackslash{}columnwidth]\{fig/results\_131.png\}
+\%\textbackslash{}caption\{Search Method AS\}
+\textbackslash{}caption\{A*.\}
+\textbackslash{}end\{center\}
+\textbackslash{}label\{fig131\}
+\textbackslash{}end\{figure\}
+        
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{results\PYZus{}sep}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} [                Problem Search Method    Heuristic  Actions  Expansions  \textbackslash{}
+          7   Air Cargo Problem 1     A* Search  Unmet Goals       20          50   
+          18  Air Cargo Problem 2     A* Search  Unmet Goals       72        2467   
+          29  Air Cargo Problem 3     A* Search  Unmet Goals       88        7388   
+          40  Air Cargo Problem 4     A* Search  Unmet Goals      104       34330   
+          
+              Goal Tests  New Nodes  Plan length  Time (s)  Time (log)  
+          7           52        206            6  0.009082   -4.701502  
+          18        2469      22522            9  0.483945   -0.725784  
+          29        7390      65711           12  0.664297   -0.409026  
+          40       34332     328509           14  3.102267    1.132133  ,
+                          Problem Search Method Heuristic  Actions  Expansions  \textbackslash{}
+          9   Air Cargo Problem 1     A* Search  MaxLevel       20          43   
+          20  Air Cargo Problem 2     A* Search  MaxLevel       72        2887   
+          31  Air Cargo Problem 3     A* Search  MaxLevel       88        9580   
+          42  Air Cargo Problem 4     A* Search  MaxLevel      104       62077   
+          
+              Goal Tests  New Nodes  Plan length     Time (s)  Time (log)  
+          9           45        180            6     0.130797   -2.034108  
+          20        2889      26594            9    68.580995    4.228015  
+          31        9582      86312           12   328.885545    5.795710  
+          42       62079     599376           14  3222.123989    8.077796  ,
+                          Problem Search Method Heuristic  Actions  Expansions  \textbackslash{}
+          8   Air Cargo Problem 1     A* Search  LevelSum       20          28   
+          19  Air Cargo Problem 2     A* Search  LevelSum       72         357   
+          30  Air Cargo Problem 3     A* Search  LevelSum       88         369   
+          41  Air Cargo Problem 4     A* Search  LevelSum      104        1208   
+          
+              Goal Tests  New Nodes  Plan length    Time (s)  Time (log)  
+          8           30        122            6    0.180238   -1.713476  
+          19         359       3426            9   11.682881    2.458125  
+          30         371       3403           12   18.008018    2.890817  
+          41        1210      12210           15  110.618458    4.706087  ,
+                          Problem Search Method Heuristic  Actions  Expansions  \textbackslash{}
+          10  Air Cargo Problem 1     A* Search  SetLevel       20          33   
+          21  Air Cargo Problem 2     A* Search  SetLevel       72        1037   
+          32  Air Cargo Problem 3     A* Search  SetLevel       88        3423   
+          43  Air Cargo Problem 4     A* Search  SetLevel      104       22606   
+          
+              Goal Tests  New Nodes  Plan length     Time (s)  Time (log)  
+          10          35        138            6     0.294279   -1.223228  
+          21        1039       9605            9    74.366656    4.309008  
+          32        3425      31596           12   399.911846    5.991244  
+          43       22608     224229           14  4182.825754    8.338742  ]
+\end{Verbatim}
+            
+    \hypertarget{use-a-table-or-chart-to-analyze-the-length-of-the-plans-returned-by-each-algorithm-on-all-search-problems}{%
+\subsubsection{3) Use a table or chart to analyze the length of the
+plans returned by each algorithm on all search
+problems}\label{use-a-table-or-chart-to-analyze-the-length-of-the-plans-returned-by-each-algorithm-on-all-search-problems}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{SP} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{results\PYZus{}sep2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{search\PYZus{}p} \PY{o+ow}{in} \PY{n}{SP}\PY{p}{:}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{n}{search\PYZus{}p}\PY{p}{)}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{temp}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{results\PYZus{}sep2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+                     
+         \PY{n}{results\PYZus{}sep2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} [                Problem                   Search Method    Heuristic  Actions  \textbackslash{}
+          22  Air Cargo Problem 3            Breadth First Search                    88   
+          23  Air Cargo Problem 3        Depth First Graph Search                    88   
+          24  Air Cargo Problem 3             Uniform Cost Search                    88   
+          25  Air Cargo Problem 3  Greedy Best First Graph Search  Unmet Goals       88   
+          26  Air Cargo Problem 3  Greedy Best First Graph Search     LevelSum       88   
+          27  Air Cargo Problem 3  Greedy Best First Graph Search     MaxLevel       88   
+          28  Air Cargo Problem 3  Greedy Best First Graph Search     SetLevel       88   
+          29  Air Cargo Problem 3                       A* Search  Unmet Goals       88   
+          30  Air Cargo Problem 3                       A* Search     LevelSum       88   
+          31  Air Cargo Problem 3                       A* Search     MaxLevel       88   
+          32  Air Cargo Problem 3                       A* Search     SetLevel       88   
+          
+              Expansions  Goal Tests  New Nodes  Plan length    Time (s)  Time (log)  
+          22       14663       18098     129625           12    0.598645   -0.513087  
+          23         408         409       3364          392    0.122798   -2.097213  
+          24       18510       18512     161936           12    0.941394   -0.060393  
+          25          25          27        230           15    0.006084   -5.102126  
+          26          14          16        126           14    1.072023    0.069548  
+          27          21          23        195           13    1.187517    0.171865  
+          28          35          37        345           17    4.498037    1.503641  
+          29        7388        7390      65711           12    0.664297   -0.409026  
+          30         369         371       3403           12   18.008018    2.890817  
+          31        9580        9582      86312           12  328.885545    5.795710  
+          32        3423        3425      31596           12  399.911846    5.991244  ,
+                          Problem                   Search Method    Heuristic  Actions  \textbackslash{}
+          0   Air Cargo Problem 1            Breadth First Search                    20   
+          1   Air Cargo Problem 1        Depth First Graph Search                    20   
+          2   Air Cargo Problem 1             Uniform Cost Search                    20   
+          3   Air Cargo Problem 1  Greedy Best First Graph Search  Unmet Goals       20   
+          4   Air Cargo Problem 1  Greedy Best First Graph Search     LevelSum       20   
+          5   Air Cargo Problem 1  Greedy Best First Graph Search     MaxLevel       20   
+          6   Air Cargo Problem 1  Greedy Best First Graph Search     SetLevel       20   
+          7   Air Cargo Problem 1                       A* Search  Unmet Goals       20   
+          8   Air Cargo Problem 1                       A* Search     LevelSum       20   
+          9   Air Cargo Problem 1                       A* Search     MaxLevel       20   
+          10  Air Cargo Problem 1                       A* Search     SetLevel       20   
+          
+              Expansions  Goal Tests  New Nodes  Plan length  Time (s)  Time (log)  
+          0           43          56        178            6  0.014622   -4.225213  
+          1           21          22         84           20  0.004608   -5.379872  
+          2           60          62        240            6  0.012984   -4.344017  
+          3            7           9         29            6  0.001330   -6.622497  
+          4            6           8         28            6  0.361100   -1.018600  
+          5            6           8         24            6  0.123746   -2.089522  
+          6            6           8         28            6  0.361199   -1.018325  
+          7           50          52        206            6  0.009082   -4.701502  
+          8           28          30        122            6  0.180238   -1.713476  
+          9           43          45        180            6  0.130797   -2.034108  
+          10          33          35        138            6  0.294279   -1.223228  ,
+                          Problem                   Search Method    Heuristic  Actions  \textbackslash{}
+          33  Air Cargo Problem 4            Breadth First Search                   104   
+          34  Air Cargo Problem 4        Depth First Graph Search                   104   
+          35  Air Cargo Problem 4             Uniform Cost Search                   104   
+          36  Air Cargo Problem 4  Greedy Best First Graph Search  Unmet Goals      104   
+          37  Air Cargo Problem 4  Greedy Best First Graph Search     LevelSum      104   
+          38  Air Cargo Problem 4  Greedy Best First Graph Search     MaxLevel      104   
+          39  Air Cargo Problem 4  Greedy Best First Graph Search     SetLevel      104   
+          40  Air Cargo Problem 4                       A* Search  Unmet Goals      104   
+          41  Air Cargo Problem 4                       A* Search     LevelSum      104   
+          42  Air Cargo Problem 4                       A* Search     MaxLevel      104   
+          43  Air Cargo Problem 4                       A* Search     SetLevel      104   
+          
+              Expansions  Goal Tests  New Nodes  Plan length     Time (s)  Time (log)  
+          33       99736      114953     944130           14     4.302616    1.459223  
+          34       25174       25175     228849        24132   787.053242    6.668296  
+          35      113339      113341    1066413           14     6.708288    1.903344  
+          36          29          31        280           18     0.034336   -3.371568  
+          37          17          19        165           17     1.747734    0.558320  
+          38          56          58        580           17     4.247899    1.446425  
+          39         107         109       1164           23    20.591328    3.024870  
+          40       34330       34332     328509           14     3.102267    1.132133  
+          41        1208        1210      12210           15   110.618458    4.706087  
+          42       62077       62079     599376           14  3222.123989    8.077796  
+          43       22606       22608     224229           14  4182.825754    8.338742  ,
+                          Problem                   Search Method    Heuristic  Actions  \textbackslash{}
+          11  Air Cargo Problem 2            Breadth First Search                    72   
+          12  Air Cargo Problem 2        Depth First Graph Search                    72   
+          13  Air Cargo Problem 2             Uniform Cost Search                    72   
+          14  Air Cargo Problem 2  Greedy Best First Graph Search  Unmet Goals       72   
+          15  Air Cargo Problem 2  Greedy Best First Graph Search     LevelSum       72   
+          16  Air Cargo Problem 2  Greedy Best First Graph Search     MaxLevel       72   
+          17  Air Cargo Problem 2  Greedy Best First Graph Search     SetLevel       72   
+          18  Air Cargo Problem 2                       A* Search  Unmet Goals       72   
+          19  Air Cargo Problem 2                       A* Search     LevelSum       72   
+          20  Air Cargo Problem 2                       A* Search     MaxLevel       72   
+          21  Air Cargo Problem 2                       A* Search     SetLevel       72   
+          
+              Expansions  Goal Tests  New Nodes  Plan length   Time (s)  Time (log)  
+          11        3343        4609      30503            9   0.262624   -1.337031  
+          12         624         625       5602          619   0.371304   -0.990735  
+          13        5154        5156      46618            9   0.472541   -0.749632  
+          14          17          19        170            9   0.020087   -3.907702  
+          15           9          11         86            9   0.462424   -0.771273  
+          16          27          29        249            9   0.893043   -0.113120  
+          17           9          11         84            9   0.952086   -0.049100  
+          18        2467        2469      22522            9   0.483945   -0.725784  
+          19         357         359       3426            9  11.682881    2.458125  
+          20        2887        2889      26594            9  68.580995    4.228015  
+          21        1037        1039       9605            9  74.366656    4.309008  ]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}table\PYZcb{}}\PY{l+s+s1}{[htpb]}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{caption}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{ Air Cargo Problem }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{ \PYZcb{}}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{centering}
+         \PY{l+s+s1}{    }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{begin}\PY{l+s+si}{\PYZob{}tabular\PYZcb{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{ l | c \PYZcb{}}
+         \PY{l+s+s1}{    Search Method \PYZam{} Plan length }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{hline }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{heur} \PY{o}{=} \PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{heur}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{alg\PYZus{}search} \PY{o}{=} \PY{n}{only\PYZus{}upper}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ w. }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{alg\PYZus{}search} \PY{o}{=} \PY{n}{only\PYZus{}upper}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{s} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{alg\PYZus{}search} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ \PYZam{} }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{alg\PYZus{}search} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ \PYZam{} }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{results\PYZus{}sep2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}tabular\PYZcb{}}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{airps}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{end}\PY{l+s+si}{\PYZob{}table\PYZcb{}}
+         
+         \PY{l+s+s1}{    }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textbackslash{}begin\{table\}[htpb]
+    \textbackslash{}caption\{ Air Cargo Problem 1 \}
+    \textbackslash{}centering
+    \textbackslash{}begin\{tabular\}\{ l | c \}
+    Search Method \& Plan length \textbackslash{}\textbackslash{} \textbackslash{}hline 
+BFS \& 0.5986446900024021 \textbackslash{}\textbackslash{}
+DFGS \& 0.1227982050004357 \textbackslash{}\textbackslash{}
+UCS \& 0.941394183999364 \textbackslash{}\textbackslash{}
+GBFGS w. Unmet Goals \& 0.00608379800178227 \textbackslash{}\textbackslash{}
+GBFGS w. LevelSum \& 1.072023241998977 \textbackslash{}\textbackslash{}
+GBFGS w. MaxLevel \& 1.187516988000425 \textbackslash{}\textbackslash{}
+GBFGS w. SetLevel \& 4.498036878998391 \textbackslash{}\textbackslash{}
+AS w. Unmet Goals \& 0.6642969690001337 \textbackslash{}\textbackslash{}
+AS w. LevelSum \& 18.008017989999644 \textbackslash{}\textbackslash{}
+AS w. MaxLevel \& 328.8855454179975 \textbackslash{}\textbackslash{}
+AS w. SetLevel \& 399.91184560200054
+\textbackslash{}end\{tabular\}
+    \textbackslash{}label\{airps1\}
+    \textbackslash{}end\{table\}
+
+    
+\textbackslash{}begin\{table\}[htpb]
+    \textbackslash{}caption\{ Air Cargo Problem 2 \}
+    \textbackslash{}centering
+    \textbackslash{}begin\{tabular\}\{ l | c \}
+    Search Method \& Plan length \textbackslash{}\textbackslash{} \textbackslash{}hline 
+BFS \& 0.014622222999605583 \textbackslash{}\textbackslash{}
+DFGS \& 0.004608410999935586 \textbackslash{}\textbackslash{}
+UCS \& 0.012984271997993346 \textbackslash{}\textbackslash{}
+GBFGS w. Unmet Goals \& 0.0013301060025696643 \textbackslash{}\textbackslash{}
+GBFGS w. LevelSum \& 0.36110015799931716 \textbackslash{}\textbackslash{}
+GBFGS w. MaxLevel \& 0.12374628299949109 \textbackslash{}\textbackslash{}
+GBFGS w. SetLevel \& 0.3611992830010422 \textbackslash{}\textbackslash{}
+AS w. Unmet Goals \& 0.009081628002604702 \textbackslash{}\textbackslash{}
+AS w. LevelSum \& 0.1802382130008482 \textbackslash{}\textbackslash{}
+AS w. MaxLevel \& 0.13079704600022524 \textbackslash{}\textbackslash{}
+AS w. SetLevel \& 0.2942786610001349
+\textbackslash{}end\{tabular\}
+    \textbackslash{}label\{airps2\}
+    \textbackslash{}end\{table\}
+
+    
+\textbackslash{}begin\{table\}[htpb]
+    \textbackslash{}caption\{ Air Cargo Problem 3 \}
+    \textbackslash{}centering
+    \textbackslash{}begin\{tabular\}\{ l | c \}
+    Search Method \& Plan length \textbackslash{}\textbackslash{} \textbackslash{}hline 
+BFS \& 4.3026164720031375 \textbackslash{}\textbackslash{}
+DFGS \& 787.0532423440018 \textbackslash{}\textbackslash{}
+UCS \& 6.708287541998288 \textbackslash{}\textbackslash{}
+GBFGS w. Unmet Goals \& 0.034335767002630746 \textbackslash{}\textbackslash{}
+GBFGS w. LevelSum \& 1.7477340049990744 \textbackslash{}\textbackslash{}
+GBFGS w. MaxLevel \& 4.247899269998015 \textbackslash{}\textbackslash{}
+GBFGS w. SetLevel \& 20.59132753800077 \textbackslash{}\textbackslash{}
+AS w. Unmet Goals \& 3.1022671290011203 \textbackslash{}\textbackslash{}
+AS w. LevelSum \& 110.61845847600125 \textbackslash{}\textbackslash{}
+AS w. MaxLevel \& 3222.123988618001 \textbackslash{}\textbackslash{}
+AS w. SetLevel \& 4182.825753874
+\textbackslash{}end\{tabular\}
+    \textbackslash{}label\{airps3\}
+    \textbackslash{}end\{table\}
+
+    
+\textbackslash{}begin\{table\}[htpb]
+    \textbackslash{}caption\{ Air Cargo Problem 4 \}
+    \textbackslash{}centering
+    \textbackslash{}begin\{tabular\}\{ l | c \}
+    Search Method \& Plan length \textbackslash{}\textbackslash{} \textbackslash{}hline 
+BFS \& 0.2626241800026037 \textbackslash{}\textbackslash{}
+DFGS \& 0.3713035319997289 \textbackslash{}\textbackslash{}
+UCS \& 0.4725405190001766 \textbackslash{}\textbackslash{}
+GBFGS w. Unmet Goals \& 0.020086606997210765 \textbackslash{}\textbackslash{}
+GBFGS w. LevelSum \& 0.4624240320008539 \textbackslash{}\textbackslash{}
+GBFGS w. MaxLevel \& 0.8930434720023186 \textbackslash{}\textbackslash{}
+GBFGS w. SetLevel \& 0.952085534001526 \textbackslash{}\textbackslash{}
+AS w. Unmet Goals \& 0.4839449959981721 \textbackslash{}\textbackslash{}
+AS w. LevelSum \& 11.6828805940022 \textbackslash{}\textbackslash{}
+AS w. MaxLevel \& 68.58099545299774 \textbackslash{}\textbackslash{}
+AS w. SetLevel \& 74.36665602699941
+\textbackslash{}end\{tabular\}
+    \textbackslash{}label\{airps4\}
+    \textbackslash{}end\{table\}
+
+    
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
